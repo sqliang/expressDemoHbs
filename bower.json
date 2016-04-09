@@ -1,0 +1,22 @@
+{
+  "name": "expressDemoHbs",
+  "description": "",
+  "main": "",
+  "authors": [
+    "sqliang"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/js/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}
