@@ -26,7 +26,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
+// 如果静态文件存放在多个目录下，可以多次调用express.static中间件
+// 访问静态资源文件时，express.static中间件会根据目录添加的顺序查找所有的文件
+app.use(express.static(path.join(__dirname, 'files')));
+
+// 希望所有通过express.static访问的文件都存放在一个“虚拟目录”（不存在的目录）下面，
+// 可以通过为静态资源目录指定一个挂载路径的方式来实现，
+app.use('/static',express.static('public'));
+
+
+
 
 // Make our db to our router
 app.use(function(req,res,next){
