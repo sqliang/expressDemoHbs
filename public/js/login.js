@@ -19,4 +19,21 @@ $(function(){
             }
         });
     });
+    $('#j-putreq').on('click',function(event){
+        var data = {
+            username:$('.user').val(),
+            email: $('.email').val()
+        };
+        $.ajax({
+            url: '/putreq',
+            type: 'PUT',
+            data: data,
+            success:function(data){
+                console.log(data);
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+    });
 });

@@ -12,7 +12,7 @@ var db = monk('localhost:27017/expressDemoHbs');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var birds = require('./routes/birds');
 var app = express();
 
 // view engine setup
@@ -45,9 +45,10 @@ app.use(function(req,res,next){
   next();
 });
 
+// 配置使用的路由列表
 app.use('/', routes);
 app.use('/users', users);
-//app.use('/about',about);
+app.use('/birds',birds);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
