@@ -30,6 +30,61 @@ app.post('/post',function(req,res){
 
 ### 路由句柄
 > 可以为请求处理提供多个回调函数，其行为类似中间件。唯一的区别是这些回调函数有可能调用next('route')方法而略过其他路由回调函数，可以利用该机制为路由定义前提条件，如果在现有路径上继续执行没有意义，则可将控制权交给剩下的路径。
+```javascript
+app.get('/example/b', function (req, res, next) {
+  console.log('response will be sent by the next function ...');
+  next();
+}, function (req, res) {
+  res.send('Hello from B!');
+});
+var cb0 = function (req, res, next) {
+  console.log('CB0');
+  next();
+}
+var cb1 = function (req, res, next) {
+  console.log('CB1');
+  next();
+}
+var cb2 = function (req, res) {
+  res.send('Hello from C!');
+}
+app.get('/example/c', [cb0, cb1, cb2]);
+```
+
+### 响应方法
+1.res.download(), 提示下载文件
+2.res.end(),终结响应处理流程
+3.res.json(),发送一个JSON格式的响应
+4.res.jsonp(),发送一个支持JSONP的JSON格式的响应
+5.res.redirect(),重定向请求
+6.res.render(),渲染视图模板
+7.res.send()，发送各种类型的响应
+8.res.sendFile,以八位字节流的形式发送文件
+9.res.sendStatus()，设置响应码状态码，并将其以字符串形式作为响应体的一部分发送
+
+### express.Router
+可以使用express.Router类创建模块化、可挂载的路由句柄。Rotuer实例是一个完整的中间件和路由系统，因此常称其为一个"mini-app"。
+```javascript
+var express = require('express');
+var router = express.Router();
+
+// 该路由使用的中间件
+router.use(function timeLog(req, res, next) {
+  console.log('Time: ', Date.now());
+  next();
+});
+// 定义网站主页的路由
+router.get('/', function(req, res) {
+  res.send('Birds home page');
+});
+// 定义 about 页面的路由
+router.get('/about', function(req, res) {
+  res.send('About birds');
+});
+
+module.exports = router;
+```
+
 
 ## 中间件的总结：
 
