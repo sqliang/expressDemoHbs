@@ -27,6 +27,7 @@ module.exports = function (router) {
                 console.log(fields);
                 console.log('received files:');
                 console.log(files);
+                res.send('success');
             }
         });
     });
