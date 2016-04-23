@@ -3,11 +3,17 @@
   <head>
       <meta charset="utf-8"/>
     <title>{{title}}</title>
+      {{!common css}}
+      <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+      {{!end}}
       {{{block "css"}}}
   </head>
   <body>
     {{{body}}}
-
+    {{! common js libs}}
+    <script src="/js/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+    {{! end}}
     {{{block "script"}}}
   </body>
 </html>

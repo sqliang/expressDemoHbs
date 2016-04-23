@@ -1,9 +1,5 @@
-{{#extend "css"}}
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
-{{/extend}}
-
 <h2>Sign up for your newsletter</h2>
-<form action="/process?form=newsletter" method="post" class="form-horizontal">
+<form action="/newsletter/process?form=newsletter" method="post" class="form-horizontal">
     <input type="hidden" name="csrf" value="{{csrf}}"/>
     <div class="form-group">
         <label for="fieldName" class="col-sm-2 control-label">
@@ -18,11 +14,12 @@
             Email
         </label>
         <div class="col-sm-4">
-            <input type="email" class="form-control" />
+            <input type="email" class="form-control" id="fieldEmail" name="email" required/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            <button type="submit" class="btn btn-primary">Register</button>
         </div>
     </div>
 </form>
-
-{{#extend "script"}}
-    <script src="/js/lib/jquery/dist/jquery.min.js"></script>
-{{/extend}}

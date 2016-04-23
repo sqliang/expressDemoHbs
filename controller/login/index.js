@@ -1,4 +1,5 @@
 /**
+ * /login下 路由配置
  * Created by dell on 2016/4/23.
  */
 'use strict';
