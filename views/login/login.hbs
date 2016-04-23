@@ -1,9 +1,13 @@
+{{#extend "css"}}
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+{{/extend}}
+
 <form class="con-tent" action="">
     <label for="username">
-       用户名：<input class="form-control" type="text" id="username" name="username" placeholder="请输入用户名"/>
+       用户名：<input class="form-control" value="{{username}}" type="text" id="username" name="username" placeholder="请输入用户名"/>
     </label>
     <label for="psw">
-       密码：<input type="text" id="psw" class="form-control" name="psw" placeholder="请输入密码"/>
+       密码：<input value="{{psw}}" type="text" id="psw" class="form-control" name="psw" placeholder="请输入密码"/>
     </label>
 </form>
 <div class="container">
@@ -19,7 +23,7 @@
 <div class="container">
     <h1>Add users</h1>
 
-    <form action="/adduser" method="post">
+    <form>
         <input class="form-control" type="text" name="username" id="user" placeholder="用户名"/>
         <input class="form-control" type="email" name="email" id="email" placeholder="邮箱"/>
         <input type="button" id="j-addUser" value="添加用户"/>
@@ -34,3 +38,8 @@
         <input type="button" value="提交put请求" id="j-putreq"/>
     </form>
 </div>
+
+{{#extend "script"}}
+    <script src="/js/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/js/login.js"></script>
+{{/extend}}

@@ -1,23 +1,6 @@
 var express = require('express');
 var router = express.Router();
-/**
- * 对网站首页的访问，数据交由index.hbs模板来渲染
- */
-router.get('/', function(req, res, next) {
-  res.render('index', { 
-  	title: 'HomePage',
-    name: 'hello'
-  });
-});
-/**
- * index，同上
- */
-router.get('/index',function(req,res,next){
-  res.render('index', {
-    title: 'HomePage',
-    name: 'hello'
-  });
-});
+
 /**
  * login
  * 获取数据库里的数据，然后交由login.hbs进行渲染
@@ -26,12 +9,11 @@ router.get('/login',function(req,res,next){
   var db = req.db;
   var collection = db.get('usercollection');
   collection.find({},{},function(e,docs){
-    res.render('login',{
+    res.render('login/login',{
       title: '登录',
       username:'sqliang',
       psw:'19891111',
-      userList: docs,
-      layout: 'partials/login'
+      userList: docs
     });
   });
 });

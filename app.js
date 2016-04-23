@@ -4,21 +4,37 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var enrouten = require('express-enrouten')
 
-//===================>mongodbÁ¬½ÓÅäÖÃ
+var hbs = require('hbs');
+//var routes = require('./routes/index');
+
+//===================mongodbè¿æ¥é…ç½®
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/expressDemoHbs');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var birds = require('./routes/birds');
+
 var app = express();
 
+//================hbsæ¨¡æ¿å¼•æ“é…ç½®
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
+// hbs æ¨¡æ¿å¼•æ“layoutç»§æ‰¿
+var blocks = {};
+hbs.registerHelper('extend',function(name,context){
+  var block = blocks[name];
+  if(!block){
+    block = blocks[name] = [];
+  }
+  // for older versions of handlebars, use block.push(context(this));
+  block.push(context.fn(this));
+});
+hbs.registerHelper('block',function(name,context){
+  var val = (blocks[name] || []).join('\n');
+  return val;
+});
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
@@ -28,15 +44,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
-// Èç¹û¾²Ì¬ÎÄ¼ş´æ·ÅÔÚ¶à¸öÄ¿Â¼ÏÂ£¬¿ÉÒÔ¶à´Îµ÷ÓÃexpress.staticÖĞ¼ä¼ş
-// ·ÃÎÊ¾²Ì¬×ÊÔ´ÎÄ¼şÊ±£¬express.staticÖĞ¼ä¼ş»á¸ù¾İÄ¿Â¼Ìí¼ÓµÄË³Ğò²éÕÒËùÓĞµÄÎÄ¼ş
+// å¦‚æœé™æ€æ–‡ä»¶å­˜æ”¾åœ¨å¤šä¸ªç›®å½•ä¸‹ï¼Œå¯ä»¥å¤šæ¬¡è°ƒç”¨express.staticä¸­é—´ä»¶
+// è®¿é—®é™æ€èµ„æºæ–‡ä»¶æ—¶ï¼Œexpress.staticä¸­é—´ä»¶ä¼šæ ¹æ®ç›®å½•æ·»åŠ çš„é¡ºåºæŸ¥æ‰¾æ‰€æœ‰çš„æ–‡ä»¶
 app.use(express.static(path.join(__dirname, 'files')));
 
-// Ï£ÍûËùÓĞÍ¨¹ıexpress.static·ÃÎÊµÄÎÄ¼ş¶¼´æ·ÅÔÚÒ»¸ö¡°ĞéÄâÄ¿Â¼¡±£¨²»´æÔÚµÄÄ¿Â¼£©ÏÂÃæ£¬
-// ¿ÉÒÔÍ¨¹ıÎª¾²Ì¬×ÊÔ´Ä¿Â¼Ö¸¶¨Ò»¸ö¹ÒÔØÂ·¾¶µÄ·½Ê½À´ÊµÏÖ£¬
-app.use('/static',express.static('public'));
-
-
+// å¸Œæœ›æ‰€æœ‰é€šè¿‡express.staticè®¿é—®çš„æ–‡ä»¶éƒ½å­˜æ”¾åœ¨ä¸€ä¸ªâ€œè™šæ‹Ÿç›®å½•â€ï¼ˆä¸å­˜åœ¨çš„ç›®å½•ï¼‰ä¸‹é¢ï¼Œ
+// å¯ä»¥é€šè¿‡ä¸ºé™æ€èµ„æºç›®å½•æŒ‡å®šä¸€ä¸ªæŒ‚è½½è·¯å¾„çš„æ–¹å¼æ¥å®ç°ï¼Œ
+//app.use('/static',express.static('public'));
 
 
 // Make our db to our router
@@ -45,10 +59,23 @@ app.use(function(req,res,next){
   next();
 });
 
-// ÅäÖÃÊ¹ÓÃµÄÂ·ÓÉÁĞ±í
-app.use('/', routes);
-app.use('/users', users);
-app.use('/birds',birds);
+
+
+
+
+
+
+
+// é…ç½®ä½¿ç”¨çš„è·¯ç”±åˆ—è¡¨
+//app.use('/', routes);
+//app.use('/users', users);
+//app.use('/birds',birds);
+
+//ä½¿ç”¨enroutené…ç½®è·¯ç”±
+app.use(enrouten({
+  directory: 'controller'
+}));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

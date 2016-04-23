@@ -6,13 +6,14 @@ $(function(){
         var data = {
             username: $('#user').val(),
             email:$('#email').val()
-        }
+        };
         $.ajax({
-            url:'/adduser',
+            url:'/login/adduser',
             type: 'POST',
             data: data,
             success: function(data){
                 console.log(data.success);
+
             },
             error: function(){
                 alert('error');
@@ -25,7 +26,7 @@ $(function(){
             email: $('.email').val()
         };
         $.ajax({
-            url: '/putreq',
+            url: '/login/putreq',
             type: 'PUT',
             data: data,
             success:function(data){
