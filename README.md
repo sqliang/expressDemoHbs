@@ -108,4 +108,4 @@ module.exports = router;
 ##参考学习资料：
 1. 60分钟学会使用node.js + Express + mongoDB （http://ggice.github.io/nodejsstart/）
 2. 使用React，nodejs,mongodb,socket.IO开发一个角色投票应用（http://www.kancloud.cn/kancloud/create-voting-app/63983）
-2. 
+3. 参考express官网.
