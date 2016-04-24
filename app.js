@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var enrouten = require('express-enrouten')
+var enrouten = require('express-enrouten');
+var session = require('express-session');
 
 var hbs = require('hbs');
 //var routes = require('./routes/index');
@@ -42,6 +43,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session());
 
 app.use(express.static(path.join(__dirname, 'public')));
 // 如果静态文件存放在多个目录下，可以多次调用express.static中间件
