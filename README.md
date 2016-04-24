@@ -2,6 +2,11 @@
 ### 这是一个基于hbs模板引擎和mongodb数据库，使用Express框架的Demon项目，主要是为了学习express框架中的一些知识。并对其进行总结
 
 ## 安装和运行
+1. 安装nodejs和mongodb
+2. 基于express4.x
+3. 使用npm install安装本地依赖包
+4. 设置mongod --dbpath data（本项目在mongodb中建立了data目录，创建了expressDemoHbs数据库和userCollection）
+5. 运行：在项目目录下运行 npm start (注意在本地node环境下安装node-dev,如果没有安装node-dev,可将package.json里的node-dev，改为node)
 
 ## 基本路由和静态文件
 
@@ -103,4 +108,4 @@ module.exports = router;
 ##参考学习资料：
 1. 60分钟学会使用node.js + Express + mongoDB （http://ggice.github.io/nodejsstart/）
 2. 使用React，nodejs,mongodb,socket.IO开发一个角色投票应用（http://www.kancloud.cn/kancloud/create-voting-app/63983）
-2. 
+3. 参考express官网.
